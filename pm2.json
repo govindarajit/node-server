@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "DATA_STEWARD_API",
+      "script": "npm start",
+      "error_file": "err.log",
+      "out_file": "out.log",
+      "log_file": "combined.log",
+      "args": "one two",
+      "instances": 1,
+      "autorestart": false,
+      "watch": false,
+      "max_memory_restart": "12G",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      },
+      "env_testing": {
+        "NODE_ENV": "testing"
+      }
+    }
+  ]
+}
