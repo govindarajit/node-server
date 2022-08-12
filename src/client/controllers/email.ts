@@ -13,7 +13,7 @@ export const sendEmail = (req: Request, res: Response) => {
     // fs.writeFileSync('data.pdf', buffer);
 
     const user: any = req.user;
-    const mailList = ["shiva.kumar@solutionec.com","ShivaKumar.Mangina-ext@sanofi.com","Sreenadh.Ganapathy@solutionec.com","shiva2nani.mangina@gmail.com"];
+    const mailList = ["deepesh@solutionec.com","govinda.raj@solutionec.com"];
     const message = "hello message";
     const subject = `Gapanalysis - ${req.body.fileName}`;
     const template = `
