@@ -42,6 +42,6 @@ dist/**/*
 yarn.lock
 
 uploads/**/*
-src/socketServer.ts
+# src/socketServer.ts
 src/shared/lib/dataLoad/dataLoad.ts
 src/shared/lib/dataLoad/excelDataLoad.ts
