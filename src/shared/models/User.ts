@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt-nodejs";
-import mongoose, { Schema, Types } from "mongoose";
+import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { appConfig } from "../../appConfig";
 import { UserRoles } from "./UserRoles";
@@ -12,12 +12,14 @@ export type UserDocument = mongoose.Document & {
     password: string;
     role: {
         type: string;
-        enum: [UserRoles.Admin, UserRoles.DataSteward, UserRoles.SuperAdmin];
-        default: UserRoles.DataSteward;
+        enum: [UserRoles.Admin, UserRoles.User, UserRoles.SuperAdmin];
+        default: UserRoles.User;
     };
     countries: [];
     token: string;
     isDeleted: boolean;
+    updatedAt: Date;
+    createdAt: Date;
     comparePassword: comparePasswordFunction;
 };
 
@@ -30,8 +32,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     role: {
         type: String,
-        enum: [UserRoles.Admin, UserRoles.DataSteward, UserRoles.SuperAdmin],
-        default: UserRoles.DataSteward,
+        enum: [UserRoles.Admin, UserRoles.User, UserRoles.SuperAdmin],
+        default: UserRoles.User,
     },
     countries: [String],
     token: String,

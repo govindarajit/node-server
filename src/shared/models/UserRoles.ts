@@ -2,6 +2,6 @@
 
 export enum UserRoles {
     Admin = "Admin",
-    DataSteward = "DataSteward",
+    User = "User",
     SuperAdmin = "SuperAdmin"
 }
