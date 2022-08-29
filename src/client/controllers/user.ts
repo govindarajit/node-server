@@ -108,3 +108,13 @@ export const getUsers = (req: Request, res: Response) => {
     });
 };
 
+export const getUserByEmail = (req: Request, res: Response) => {
+    User.findOne(req.body).then((user) => {
+        console.log(user);
+        res.json(user);
+    }).catch(err => {
+        res.json({
+            message: err.message || "Invalid email or password."
+        });
+    });
+};

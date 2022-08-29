@@ -5,6 +5,7 @@ import * as sheetSettingController from "./controllers/sheetSetting";
 import * as columnSettingController from "./controllers/columnSetting";
 import * as masterColumnController from "./controllers/masterColumn";
 import * as userController from "./controllers/user";
+import * as templateController from "./controllers/requestTemplate";
 import * as emailController from "./controllers/email";
 import * as marketSaleController from "./controllers/marketSale";
 import * as fileUploadController from "./controllers/fileUpload";
@@ -27,6 +28,7 @@ routes.get("/daily-mail",fileUploadController.dailyMail);
  * User routes
  */
 routes.get("/user/list", auth, allow([UserRoles.SuperAdmin]), userController.getUsers);
+routes.post("/user", userController.getUserByEmail);
 routes.post("/user/add-user", auth, allow([UserRoles.SuperAdmin]), userController.addUser);
 routes.post("/user/update", auth, allow([UserRoles.SuperAdmin]), userController.update);
 routes.delete("/user/:id", auth, allow([UserRoles.SuperAdmin]), userController.deleteUser);
@@ -128,7 +130,13 @@ routes.get("/market-sales/summary/:field/:currentFileId/:previousFileId", auth, 
  */
 routes.post("/send-email/graphs", emailController.sendEmail);
 
-
+routes.post("/templateRequest",templateController.addTemplateRequest);
+routes.post("/templateInputRequest",templateController.addInputTemplateRequest);
+routes.post("/templateOutputRequest",templateController.addOutputTemplateRequest);
+routes.post("/templateMappingRequest",templateController.addMappingTemplateRequest);
+routes.post("/gettemplateRequestByUser",templateController.getTemplateRequestByUser);
+routes.get("/getTemplateRequestById/:id",templateController.getTemplateRequestById);
+routes.delete("/deletetemplateRequest/:id",templateController.deleteTemplateRequest);
  
 
 

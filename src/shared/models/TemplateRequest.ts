@@ -2,23 +2,82 @@ import mongoose, { Schema } from "mongoose";
 
 export type templateRequest = mongoose.Document & {
     
-    userId: { type: Schema.Types.ObjectId; ref: "User" };
-    templateName: string;
-    country: string;
-    fileName: string;
-    entrantName: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
+        userId: { type: Schema.Types.ObjectId, ref: "User" },
+        templateDetails:{
+                          templateName: String,
+                          countryName: String,
+                          folderName: String,
+                          fileExtension: String,
+                        //   entrantName: { type: Schema.Types.ObjectId, ref: "Email" }
+                        },
+        inputDetails:{ type: Schema.Types.ObjectId, ref: "templateInputRequest" },
+        outputDetails:{ type: Schema.Types.ObjectId, ref: "templateOutputRequest" },
+        relationMapping:{ type: Schema.Types.ObjectId, ref: "templateMappingRequest" },
+    //     inputDetails:[
+    //                    {
+    //                     fileName: String,
+    //                     table:[
+    //                         {
+    //                             tableName:String,
+    //                             rows:[
+    //                                 {
+    //                                     colName: String,
+    //                                     datatype: String,
+    //                                     mandatory: Boolean,
+    //                                     format: String,
+    //                                     inputingValues: String,
+    //                                     values: String,
+    //                                     regex: Boolean,
+    //                                     fullMatch: Boolean,
+    //                                     ignoreCase: Boolean,
+    //                                 }
+    //                             ]
+    //                         }
+    //                     ]
+    //                    }
+    //     ],
+    //     outputDetails:[
+    //         {
+    //          fileName: String,
+    //          table:[
+    //              {
+    //                  tableName:String,
+    //                  rows:[
+    //                      {
+    //                          colName: String,
+    //                          datatype: String,
+    //                          mandatory: Boolean,
+    //                      }
+    //                  ]
+    //              }
+    //          ]
+    //         }
+    // ],
+    //     relationMapping:[
+    //         {
+    //             start: String,
+    //             end: String
+    //         }
+    //     ],
+        createdAt: Date,
+        updatedAt: Date,
+    };
 
 const templateRequestSchema = new mongoose.Schema({
+    
     userId: { type: Schema.Types.ObjectId, ref: "User" },
-    templateName: String,
-    country: String,
-    fileName: String,
-    entrantName: { type: Schema.Types.ObjectId, ref: "Email" },
+    templateDetails:{
+                      templateName: String,
+                      countryName: String,
+                      folderName: String,
+                      fileExtension: String,
+                    //   entrantName: { type: Schema.Types.ObjectId, ref: "Email" }
+                    },
+    inputDetails:{ type: Schema.Types.ObjectId, ref: "templateInputRequest" },
+    outputDetails:{ type: Schema.Types.ObjectId, ref: "templateOutputRequest" },
+    relationMapping:{ type: Schema.Types.ObjectId, ref: "templateMappingRequest" },
     createdAt: Date,
     updatedAt: Date,
 }, { timestamps: true , collection: "templateRequest"});
 
-export const ChangeRequest = mongoose.model<templateRequest>("ChangeRequest", templateRequestSchema);
+export const ChangeTemplateRequest = mongoose.model<templateRequest>("ChangeTemplateRequest", templateRequestSchema);
