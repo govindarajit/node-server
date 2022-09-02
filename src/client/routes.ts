@@ -132,10 +132,14 @@ routes.post("/send-email/graphs", emailController.sendEmail);
 
 routes.post("/templateRequest",templateController.addTemplateRequest);
 routes.post("/templateInputRequest",templateController.addInputTemplateRequest);
+routes.post("/templateInputWorkbookRequest",templateController.addInputWorkbookTemplateRequest);
+routes.post("/templateInputTableRequest",templateController.addInputTableTemplateRequest);
+routes.post("/templateInputRowRequest",templateController.addInputRowTemplateRequest);
 routes.post("/templateOutputRequest",templateController.addOutputTemplateRequest);
 routes.post("/templateMappingRequest",templateController.addMappingTemplateRequest);
 routes.post("/gettemplateRequestByUser",templateController.getTemplateRequestByUser);
 routes.get("/getTemplateRequestById/:id",templateController.getTemplateRequestById);
+routes.get("/getWorkbookTemplateRequestById/:id",templateController.getWorkbookTemplateRequestById);
 routes.delete("/deletetemplateRequest/:id",templateController.deleteTemplateRequest);
  
 

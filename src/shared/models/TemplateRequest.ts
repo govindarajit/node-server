@@ -10,9 +10,6 @@ export type templateRequest = mongoose.Document & {
                           fileExtension: String,
                         //   entrantName: { type: Schema.Types.ObjectId, ref: "Email" }
                         },
-        inputDetails:{ type: Schema.Types.ObjectId, ref: "templateInputRequest" },
-        outputDetails:{ type: Schema.Types.ObjectId, ref: "templateOutputRequest" },
-        relationMapping:{ type: Schema.Types.ObjectId, ref: "templateMappingRequest" },
     //     inputDetails:[
     //                    {
     //                     fileName: String,
@@ -73,9 +70,6 @@ const templateRequestSchema = new mongoose.Schema({
                       fileExtension: String,
                     //   entrantName: { type: Schema.Types.ObjectId, ref: "Email" }
                     },
-    inputDetails:{ type: Schema.Types.ObjectId, ref: "templateInputRequest" },
-    outputDetails:{ type: Schema.Types.ObjectId, ref: "templateOutputRequest" },
-    relationMapping:{ type: Schema.Types.ObjectId, ref: "templateMappingRequest" },
     createdAt: Date,
     updatedAt: Date,
 }, { timestamps: true , collection: "templateRequest"});
