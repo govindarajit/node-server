@@ -202,6 +202,7 @@ const templateRequestSchema = new mongoose.Schema({
         }
     ],
     status:String,
+    reason:String,
     createdAt: Date,
     updatedAt: Date,
 }, { timestamps: true , collection: "templateRequest"});

@@ -120,6 +120,31 @@ export const getTemplateRequest = (req: Request, res: Response) => {
             });
 };
 
+export const updateStatusTemplateRequest = (req: Request, res: Response) => {
+    ChangeTemplateRequest.updateOne({ _id: req.params.id },{status:'approved'})
+             .then(Users => {
+                res.json(Users);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while retrieving."
+                });
+            });
+};
+
+export const updateStatusByRejectTemplateRequest = (req: Request, res: Response) => {
+    console.log(req.body);
+    ChangeTemplateRequest.updateOne({ _id: req.body.id },{status:'rejected',reason:req.body.reason})
+             .then(Users => {
+                res.json(Users);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while retrieving."
+                });
+            });
+};
+
 export const deleteTemplateRequest = (req: Request, res: Response) => {
     ChangeTemplateRequest.deleteOne({ _id: req.params.id })
     .then((response: any) => {
