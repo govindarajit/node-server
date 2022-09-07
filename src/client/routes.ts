@@ -137,7 +137,7 @@ routes.post("/templateInputTableRequest",templateController.addInputTableTemplat
 routes.post("/templateInputRowRequest",templateController.addInputRowTemplateRequest);
 routes.post("/templateOutputRequest",templateController.addOutputTemplateRequest);
 routes.post("/templateMappingRequest",templateController.addMappingTemplateRequest);
-routes.post("/gettemplateRequestByUser",templateController.getTemplateRequestByUser);
+routes.post("/getAllTemplateRequestByUser",templateController.getAllTemplateRequestByUser);
 routes.get("/getTemplateRequestById/:id",templateController.getTemplateRequestById);
 routes.get("/getTemplateRequest",templateController.getTemplateRequest);
 routes.post("/updateStatusTemplateRequest/:id",templateController.updateStatusTemplateRequest);

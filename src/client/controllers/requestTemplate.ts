@@ -120,6 +120,18 @@ export const getTemplateRequest = (req: Request, res: Response) => {
             });
 };
 
+export const getAllTemplateRequestByUser = (req: Request, res: Response) => {
+    ChangeTemplateRequest.find({userId:req.body.id}).populate('userId')
+             .then(Users => {
+                res.json(Users);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while retrieving."
+                });
+            });
+};
+
 export const updateStatusTemplateRequest = (req: Request, res: Response) => {
     ChangeTemplateRequest.updateOne({ _id: req.params.id },{status:'approved'})
              .then(Users => {
