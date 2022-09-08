@@ -97,7 +97,7 @@ export const getTemplateRequestByUser = (req: Request, res: Response) => {
 };
 
 export const getTemplateRequestById = (req: Request, res: Response) => {
-    ChangeTemplateRequest.findById({ _id: req.params.id })
+    ChangeTemplateRequest.findById({ _id: req.params.id }).populate('userId')
              .then(User => {
                 res.json(User);
             })
@@ -133,8 +133,31 @@ export const getAllTemplateRequestByUser = (req: Request, res: Response) => {
 };
 
 export const updateStatusTemplateRequest = (req: Request, res: Response) => {
-    ChangeTemplateRequest.updateOne({ _id: req.params.id },{status:'approved'})
+    let body={};
+    let emailList=[];
+    if(req.body.status==='approved')
+    {
+        emailList.push(req.body.email);
+        body={status:'approved'};
+    }
+    else if (req.body.status==='rejected')
+    {
+        emailList.push(req.body.email);
+        body={status:'rejected',reason:req.body.reason}
+    }
+    else if (req.body.status==='deleted')
+    {
+        emailList.push(req.body.email);
+        emailList.push('chamarthi.vamsi@solutionec.com');
+        body={status:'deleted',reason:req.body.reason}
+    }
+    console.log(req.body.email,emailList)
+
+    ChangeTemplateRequest.updateOne({ _id: req.body.id },body)
              .then(Users => {
+                Mailer.sendMail(emailList,`Your template request has been ${req.body.status}.`,'Template request status updated',null)
+                .then((res)=>console.log("Email triggered"))
+                .catch((err)=>console.log("Email not triggered"))
                 res.json(Users);
             })
             .catch(err => {
@@ -146,7 +169,7 @@ export const updateStatusTemplateRequest = (req: Request, res: Response) => {
 
 export const updateStatusByRejectTemplateRequest = (req: Request, res: Response) => {
     console.log(req.body);
-    ChangeTemplateRequest.updateOne({ _id: req.body.id },{status:'rejected',reason:req.body.reason})
+    ChangeTemplateRequest.updateOne({ _id: req.body.id },{status:'pending'})
              .then(Users => {
                 res.json(Users);
             })

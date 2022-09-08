@@ -140,7 +140,7 @@ routes.post("/templateMappingRequest",templateController.addMappingTemplateReque
 routes.post("/getAllTemplateRequestByUser",templateController.getAllTemplateRequestByUser);
 routes.get("/getTemplateRequestById/:id",templateController.getTemplateRequestById);
 routes.get("/getTemplateRequest",templateController.getTemplateRequest);
-routes.post("/updateStatusTemplateRequest/:id",templateController.updateStatusTemplateRequest);
+routes.post("/updateStatusTemplateRequest",templateController.updateStatusTemplateRequest);
 routes.post("/updateStatusByRejectTemplateRequest",templateController.updateStatusByRejectTemplateRequest);
 routes.get("/getWorkbookTemplateRequestById/:id",templateController.getWorkbookTemplateRequestById);
 routes.delete("/deletetemplateRequest/:id",templateController.deleteTemplateRequest);
