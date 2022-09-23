@@ -16,13 +16,12 @@ import { allow } from "../shared/middlewares/acl.middleware";
 import { UserRoles } from "../shared/models/UserRoles";
 import { ColumnOrder } from "../shared/lib/dataLoad/order";
 
-
 const routes = require("express").Router();
 
 /**
  * Mailer
  */
-routes.get("/daily-mail",fileUploadController.dailyMail);
+routes.get("/daily-mail", fileUploadController.dailyMail);
 
 /**
  * User routes
@@ -37,7 +36,7 @@ routes.post("/user/login", userController.loginUser);
 /**
  * country routes
  */
-routes.get("/countries",auth, countryController.getAllCountryData);
+routes.get("/countries", auth, countryController.getAllCountryData);
 
 /**
  * master column routes
@@ -104,13 +103,13 @@ routes.post("/market-sales-pack/:fileUploadId", marketSaleController.getpackData
 /**
  * chcAlignment upload
  */
-routes.get("/chc-alignment/get-data",auth, chcAlignmentController.getChcAlignments);
+routes.get("/chc-alignment/get-data", auth, chcAlignmentController.getChcAlignments);
 routes.post("/chc-alignment/upload", auth, chcAlignmentMiddleware.any(), chcAlignmentController.addChcAlignment);
 
 /**
  * changeRequest
  */
-routes.get("/chc-alignment/get-change-request-data",auth,  chcAlignmentController.getChcChangeRequest);
+routes.get("/chc-alignment/get-change-request-data", auth, chcAlignmentController.getChcChangeRequest);
 //routes.post("/changeRequest", auth, chcAlignmentController.addRequest);
 routes.post("/changeRequest", auth, chcAlignmentController.addRequest);
 routes.delete("/chc-changeRequest/approve/:currentDocumentId", auth, chcAlignmentController.changeRequestApproved);
@@ -118,7 +117,7 @@ routes.delete("/chc-changeRequest/reject/:currentDocumentId/:reason", auth, chcA
 routes.get("/chc-changeRequest/getId/:currentDocumentId", auth, chcAlignmentController.getId);
 routes.get("/market-sales/column-order", auth, (req: any, res: any) => {
     res.json(ColumnOrder);
- });
+});
 
 /**
  * threshold
@@ -130,22 +129,23 @@ routes.get("/market-sales/summary/:field/:currentFileId/:previousFileId", auth, 
  */
 routes.post("/send-email/graphs", emailController.sendEmail);
 
-routes.post("/templateRequest",templateController.addTemplateRequest);
-routes.post("/templateInputRequest",templateController.addInputTemplateRequest);
-routes.post("/templateInputWorkbookRequest",templateController.addInputWorkbookTemplateRequest);
-routes.post("/templateInputTableRequest",templateController.addInputTableTemplateRequest);
-routes.post("/templateInputRowRequest",templateController.addInputRowTemplateRequest);
-routes.post("/templateOutputRequest",templateController.addOutputTemplateRequest);
-routes.post("/templateMappingRequest",templateController.addMappingTemplateRequest);
-routes.post("/getAllTemplateRequestByUser",templateController.getAllTemplateRequestByUser);
-routes.get("/getTemplateRequestById/:id",templateController.getTemplateRequestById);
-routes.get("/getTemplateRequest",templateController.getTemplateRequest);
-routes.post("/updateStatusTemplateRequest",templateController.updateStatusTemplateRequest);
-routes.post("/updateStatusByRejectTemplateRequest",templateController.updateStatusByRejectTemplateRequest);
-routes.get("/getWorkbookTemplateRequestById/:id",templateController.getWorkbookTemplateRequestById);
-routes.delete("/deletetemplateRequest/:id",templateController.deleteTemplateRequest);
- 
-
+routes.post("/templateRequest", templateController.addTemplateRequest);
+routes.post("/templateInputRequest", templateController.addInputTemplateRequest);
+routes.post("/templateInputWorkbookRequest", templateController.addInputWorkbookTemplateRequest);
+routes.post("/templateInputTableRequest", templateController.addInputTableTemplateRequest);
+routes.post("/templateInputRowRequest", templateController.addInputRowTemplateRequest);
+routes.post("/templateOutputRequest", templateController.addOutputTemplateRequest);
+routes.post("/templateMappingRequest", templateController.addMappingTemplateRequest);
+routes.post("/getAllTemplateRequestByUser", templateController.getAllTemplateRequestByUser);
+routes.get("/getTemplateRequestById/:id", templateController.getTemplateRequestById);
+routes.get("/getTemplateRequest", templateController.getTemplateRequest);
+routes.get("/getApprovedTemplateRequest", templateController.getApprovedTemplateRequest);
+routes.post("/updateStatusTemplateRequest", templateController.updateStatusTemplateRequest);
+routes.post("/templateInputRowUpdate", templateController.templateInputRowUpdate);
+routes.post("/templateInputTableUpdate", templateController.templateInputTableUpdate);
+routes.post("/templateInputWorkbookUpdate", templateController.templateInputWorkbookUpdate);
+routes.post("/updateStatusByRejectTemplateRequest", templateController.updateStatusByRejectTemplateRequest);
+routes.get("/getWorkbookTemplateRequestById/:id", templateController.getWorkbookTemplateRequestById);
+routes.delete("/deletetemplateRequest/:id", templateController.deleteTemplateRequest);
 
 module.exports = routes;
-

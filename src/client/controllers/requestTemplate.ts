@@ -93,7 +93,10 @@ export const addMappingTemplateRequest = (req: Request, res: Response) => {
 };
 
 export const getTemplateRequestByUser = (req: Request, res: Response) => {
-    ChangeTemplateRequest.find({ userId: req.body.id })
+    ChangeTemplateRequest.find({ userId: req.body.id, status: { $ne: "deleted" } })
+        .populate("userId")
+        .populate({ path: "inputDetails", populate: { path: "table", populate: { path: "rows" } } })
+        .populate({ path: "outputDetails", populate: { path: "table", populate: { path: "rows" } } })
         .then((Users) => {
             res.json(Users);
         })
@@ -107,6 +110,8 @@ export const getTemplateRequestByUser = (req: Request, res: Response) => {
 export const getTemplateRequestById = (req: Request, res: Response) => {
     ChangeTemplateRequest.findById({ _id: req.params.id })
         .populate("userId")
+        .populate({ path: "inputDetails", populate: { path: "table", populate: { path: "rows" } } })
+        .populate({ path: "outputDetails", populate: { path: "table", populate: { path: "rows" } } })
         .then((User) => {
             res.json(User);
         })
@@ -118,7 +123,22 @@ export const getTemplateRequestById = (req: Request, res: Response) => {
 };
 
 export const getTemplateRequest = (req: Request, res: Response) => {
-    ChangeTemplateRequest.find()
+    ChangeTemplateRequest.find({ status: { $ne: "deleted" } })
+        .populate("userId")
+        .populate({ path: "inputDetails", populate: { path: "table", populate: { path: "rows" } } })
+        .populate({ path: "outputDetails", populate: { path: "table", populate: { path: "rows" } } })
+        .then((Users) => {
+            res.json(Users);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving."
+            });
+        });
+};
+
+export const getApprovedTemplateRequest = (req: Request, res: Response) => {
+    ChangeTemplateRequest.find({ status: { $eq: "approved" } })
         .populate("userId")
         .then((Users) => {
             res.json(Users);
@@ -133,6 +153,9 @@ export const getTemplateRequest = (req: Request, res: Response) => {
 export const getAllTemplateRequestByUser = (req: Request, res: Response) => {
     ChangeTemplateRequest.find({ userId: req.body.id })
         .populate("userId")
+        .populate({ path: "inputDetails", populate: { path: "table", populate: { path: "rows" } } })
+        .populate({ path: "outputDetails", populate: { path: "table", populate: { path: "rows" } } })
+
         .then((Users) => {
             res.json(Users);
         })
@@ -148,6 +171,7 @@ export const updateStatusTemplateRequest = (req: Request, res: Response) => {
     let emailList = [];
     if (req.body.status === "pending") {
         body = req.body;
+        emailList.push(req.body.templateDetails.entrantName);
     } else if (req.body.status === "approved") {
         emailList.push(req.body.email);
         body = { status: "approved" };
@@ -171,6 +195,7 @@ export const updateStatusTemplateRequest = (req: Request, res: Response) => {
             )
                 .then((res) => console.log("Email triggered"))
                 .catch((err) => console.log("Email not triggered"));
+            console.log(Users);
             res.json(Users);
         })
         .catch((err) => {
@@ -204,6 +229,42 @@ export const getWorkbookTemplateRequestById = (req: Request, res: Response) => {
         .populate("templateInputId")
         .then((User) => {
             res.json(User);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving."
+            });
+        });
+};
+
+export const templateInputRowUpdate = (req: Request, res: Response) => {
+    ChangeInputRowTemplateRequest.updateOne({ _id: req.body._id }, req.body)
+        .then((Users) => {
+            res.json(Users);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving."
+            });
+        });
+};
+
+export const templateInputTableUpdate = (req: Request, res: Response) => {
+    ChangeInputTableTemplateRequest.updateOne({ _id: req.body._id }, req.body)
+        .then((Users) => {
+            res.json(Users);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving."
+            });
+        });
+};
+export const templateInputWorkbookUpdate = (req: Request, res: Response) => {
+    ChangeInputWorkbookTemplateRequest.updateOne({ _id: req.body._id }, req.body)
+        .then((Users) => {
+            res.json(Users);
+            console.log("line267", Users);
         })
         .catch((err) => {
             res.status(500).send({
