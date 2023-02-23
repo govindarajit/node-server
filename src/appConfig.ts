@@ -1,34 +1,33 @@
 import path from "path";
-const _ = require("lodash");
-// export const env = process.env.NODE_ENV || "testing";
+const _ = require("lodash"); 
 export const env = process.env.NODE_ENV || "development";
 
 const envConfig: any = {
     default: {
         root: `${path.resolve(__dirname).replace("/dist", "").replace("dist", "")}`,
+       
         cmdXlsx: `${path
-            .resolve(__dirname + "/node_modules/solutionec-xlsx/bin/xlsx.njs")
+            .resolve(__dirname + "/node_modules/from-xlsx/bin/xlsx.njs")
             .replace("/dist", "")
             .replace("dist", "")}`,
-        sessionSecret: "ashdfjhasdlkjfhalksdjhflak",
-        secret: "or8kN8l1L7",
+        sessionSecret: "gdfgdfaereredf",
+        secret: "oi8kK8l4J6",
         assets: {
             dataLoad: {
                 rawFiles: "uploads/data-load/raw-files",
                 archives: "uploads/data-load/archives"
             }
         },
-        email: {
-            admin: "admin@solutionec.com",
-            solutionec: "developer@solutionec.com"
+        email: { 
+            from: "mona44146@outlook.com"
         },
         smtp: {
             host: "smtp.office365.com", // hostname
             secureConnection: false, // TLS requires secureConnection to be false
             port: 587, // port for secure SMTP
             auth: {
-                user: "developer@solutionec.com",
-                pass: "Bangalore!3030"
+                user: "mona44146@outlook.com",
+                pass: "Monakarthik&143"
             },
             tls: {
                 ciphers: "SSLv3"
@@ -37,10 +36,10 @@ const envConfig: any = {
     },
     development: {
         database: {
-            name: "test",
-            host: "cluster0.bwxhn38.mongodb.net",
-            username: "User123",
-            password: "User123",
+            name: "microfrontends",
+            host: "microfrontends.74hsebi.mongodb.net",
+            username: "mounika",
+            password: "mounika",
             mongoImportHost: "Cluster0-shard-0/cluster0-shard-00-00-ixhal.mongodb.net:27017,cluster0-shard-00-01-ixhal.mongodb.net:27017,cluster0-shard-00-02-ixhal.mongodb.net:27017",
             getUri: () => {
                 return `mongodb+srv://${envConfig.development.database.username}:${encodeURIComponent(envConfig.development.database.password)}@${envConfig.development.database.host}/${envConfig.development.database.name
@@ -53,15 +52,7 @@ const envConfig: any = {
 
 
         },
-        email: {
-            fileUploadNotificationEmailList: ["developer@solutionec.com"],
-            fileDelayEmailList: [],
-            fileApprovedEmailList: [],
-            fileRejectedEmailList: [],
-            fileDeleteEmailList: [],
-            admin: "admin@solutionec.com",
-            solutionec: "developer@solutionec.com"
-        }
+        
     }
 };
 

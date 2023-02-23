@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import compression from "compression";  // compresses requests
+import compression from "compression";  
 import session from "express-session";
 import bodyParser from "body-parser";
 import lusca from "lusca";
@@ -26,7 +26,7 @@ Db.connect();
 // Express configuration
 app.use(cors());
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3005);
 app.use(compression());
 app.use(bodyParser.json({ limit: "100mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "100mb" }));
@@ -48,8 +48,7 @@ app.use((req, res, next) => {
     res.locals.user = req.user;
     next();
 });
-app.use((req, res, next) => {
-    // After successful login, redirect back to the intended page
+app.use((req, res, next) => { 
     if (!req.user &&
         req.path !== "/login" &&
         req.path !== "/signup" &&
